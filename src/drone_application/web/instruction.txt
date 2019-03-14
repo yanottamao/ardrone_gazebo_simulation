@@ -1,0 +1,9 @@
+1. Open new terminal
+
+    $ roslaunch rosbridge_server rosbridge_websocket.launch
+
+2. Open html file in browser
+
+3. Open launch file in new terminal
+
+    $ roslaunch drone_application test_simulator.launch

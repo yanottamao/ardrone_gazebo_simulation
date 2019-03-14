@@ -1,0 +1,55 @@
+Open new terminal to enter command
+
+# to fly 
+rostopic pub -1 ardrone/takeoff std_msgs/Empty
+
+# to land
+rostopic pub -1 ardrone/land std_msgs/Empty
+
+# fly forward, you can change the linear x value to positive
+rostopic pub -r 10 /cmd_vel geometry_msgs/Twist  '{linear:  {x: 1.0, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.0}}'
+
+# fly backward, you can change the linear x value to negative
+rostopic pub -r 10 /cmd_vel geometry_msgs/Twist  '{linear:  {x: -1.0, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.0}}'
+
+# fly to left, you can change the linear y value to positive
+rostopic pub -r 10 /cmd_vel geometry_msgs/Twist  '{linear:  {x: 0.0, y: 1.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.0}}'
+
+# fly to right, you can change the linear y value to negative
+rostopic pub -r 10 /cmd_vel geometry_msgs/Twist  '{linear:  {x: 0.0, y: -1.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.0}}'
+
+# fly up, you can change the linear z value to positive
+rostopic pub -r 10 /cmd_vel geometry_msgs/Twist  '{linear:  {x: 0.0, y: 0.0, z: 1.0}, angular: {x: 0.0, y: 0.0, z: 0.0}}'
+
+# fly down, you can change the linear z value to negative
+rostopic pub -r 10 /cmd_vel geometry_msgs/Twist  '{linear:  {x: 0.0, y: 0.0, z: -1.0}, angular: {x: 0.0, y: 0.0, z: 0.0}}'
+
+# counterclockwise rotation, you can change the angular z value to positive
+rostopic pub -r 10 /cmd_vel geometry_msgs/Twist  '{linear:  {x: 0.0, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 1.0}}'
+
+# clockwise rotation, you can change the angular z value to negative
+rostopic pub -r 10 /cmd_vel geometry_msgs/Twist  '{linear:  {x: 0.0, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: -1.0}}'
+
+# stop
+rostopic pub -r 10 /cmd_vel geometry_msgs/Twist  '{linear:  {x: 0.0, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.0}}'
+
+# switch camera
+rosservice call /ardrone/togglecam
+
+# The output camera
+rosrun image_view image_view image:=/ardrone/image_raw
+
+# The front camera
+rosrun image_view image_view image:=/ardrone/front/image_raw
+
+# The buttom camera
+rosrun image_view image_view image:=/ardrone/bottom/image_raw
+
+# The height senso
+rostopic echo /sonar_height
+
+#The navigation info
+rostopic echo /ardrone/navdata
+
+#A launch file for joystick drivers and image view nodes
+roslaunch cvg_sim_test demo_tool.launch
